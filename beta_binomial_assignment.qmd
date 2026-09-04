@@ -77,6 +77,34 @@ Things to keep on mind:
 
 - Is your prior based on real past counts (pseudo-counts) or an elicited belief — and can you say why you chose that one?
 
+## AI Prompt:
+
+Can you critique this idea as a beta binomial use case: A Teacher is deciding which operating system to make the examples with the other operating systems will have linked guides on the page. The class last year was 12 apple users and 43 windows users The class this year was 22 apple users and 47 windows users Which operating system should next year's class be primarily geared towards.
+
+## AI Response:
+
+Solid instinct, but there's a real trend issue baked into your data that a naive beta-binomial pooling would hide.
+
+**What you'd do:** Treat "P(Apple)" as your parameter, put a prior (maybe Beta(1,1) or informed by industry stats), update with year 1 (12/55), update again with year 2 (22/69), get a posterior Beta(35, 96), mean ≈ 26.7%. Decide Windows-primary since posterior mass is overwhelmingly below 50%.
+
+**Where it's shakier:**
+
+1.  **Stationarity assumption.** Beta-binomial pooling implicitly assumes both years are draws from the *same* underlying p. But your data shows real drift: 21.8% → 31.9% Apple share. That's a 10-point jump, not noise you'd want to average away. Pooling treats last year and this year as equally informative about *next* year, which throws away the trend.
+
+    **Fix options:**
+
+    - Weight recent data more (e.g., use year 2 as your effective prior mass, or apply a discount factor to year 1 counts before pooling).
+
+    - Go hierarchical: model each year's count as Binomial(n_t, p_t) with p_t drawn from a shared distribution, which lets you see between-year variance instead of masking it.
+
+    - Simplest defensible tweak: just use year 2 alone (or year 2 with a weak prior) as your best estimate of "current" p, and mention year 1 only as evidence of an upward trend in Apple share, i.e., flag that even 32% may undershoot next year.
+
+    **The decision itself isn't just a point estimate.** "Which OS to primarily gear toward" is a decision problem, not just an inference problem — you're implicitly minimizing something like "cost of a student needing the linked guide instead of the primary walkthrough." Beta-binomial gives you the posterior on p; you still need to state the loss function (majority-rules threshold at 50% is one choice, but if Apple's share is trending up, you might want a buffer, like only committing to Windows-primary if P(p_Apple \< 0.4) is high).
+
+    **Binary OS assumption.** You've excluded Linux/other entirely — fine if genuinely negligible, but worth stating as an assumption.
+
+Bottom line: beta-binomial is a fine tool for the "what's my best estimate of p" piece, but pooling two years naively will understate Apple's momentum. If the trend continues, Windows may still be safely primary this year, but you're closer to the line than the pooled 26.7% estimate suggests — I'd flag that explicitly rather than let the model average it away.
+
 ### Prior
 
 Set the scene...
