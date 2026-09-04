@@ -98,7 +98,7 @@
 ## closer to the prior or closer to the data? Does this match the
 ## weight sentence? Why did the data win here when it didn't in Q5?
 ##
-## Your answer: The data here is stron
+## Your answer: The new data is stronger and as a result the posterior shows up much closer to it than the prior.
 ##
 ##
 ## ------------------------------------------------------------
@@ -111,7 +111,9 @@
 ## if you suspected support was genuinely trending upward, not just
 ## noisily varying around a fixed number.
 ##
-## Your answer:
+## Your answer: The issue is that over time events can take place the fundamentally change 
+## where the support lies and the prior can end up dragging the mean away from the new probability
+## of support for the canidate. 
 ##
 ##
 ## ============================================================
