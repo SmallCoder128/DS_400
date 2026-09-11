@@ -120,8 +120,7 @@ Which operating system should next year's class be primarily geared towards.
 define π
 
 ```{r}
-plot_beta(alpha = 12, beta = 43) + 
-  geom_vline
+plot_beta(alpha = 12, beta = 43)
   
 ```
 
