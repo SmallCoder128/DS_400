@@ -109,7 +109,7 @@ Bottom line: beta-binomial is a fine tool for the "what's my best estimate of p"
 
 Set the scene...
 
-A Teacher is deciding which operating system to make the examples with the other operating systems will have linked guides on the page.
+A Computer Science Teacher is deciding which operating system to make the example for a setup guide in their class. Historically he's used windows as the example but he's been hearing good things about apple products. Should he switch which operating system he uses as the example.
 
 The class last year was 12 apple users and 43 windows users
 
@@ -130,13 +130,13 @@ Prior effective sample size = 55
 
 ### Likelihood
 
-**New data arrives:** We commission new data of *n* and record *y* , the number .... We gather x data points in which y (x%) ... -- noticeably higher/lower than the x% prior average.
+**New data arrives:** We commission new data of 69 and record 22 , the number of students using apple computers. We gather 69 data points in which (32%) ... -- noticeably higher than the 22% prior average.
 
 ```{r}
 plot_binomial_likelihood(y = 22 , n = 69 )
 ```
 
-Likelihood Question: "For each possible value of π —.... — how compatible is that value with having produced exactly y out of n in this data collection?"
+Likelihood Question: "For each possible value of π apple user students how compatible is that value with having produced exactly y out of n in this data collection?"
 
 Likelihood Statement: "Taken on its own, this data makes values of π near 34% far more plausible than values near 12% — the data alone points to a higher number than we'd been expecting"
 
