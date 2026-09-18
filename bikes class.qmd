@@ -27,20 +27,31 @@ Starter Questions:
 1.  What is the distribution of ridership? Make a histogram and write what you see below
 
 ```{r}
-
+ggplot(bikes_data, aes(x= rides, fill = month)) + 
+  geom_histogram() + 
+  scale_fill_viridis_d()
 ```
 
 2.  Has ridership increased over time? Make a plot and write what you see below
 
 ```{r}
 
+line_plot <- ggplot(bikes_data, aes(x = date, y = rides,)) + 
+  geom_line() + 
+  geom_point()
+
+ggplotly(line_plot)
+
 ```
 
-```{}
+```         
+ridership has generally increased however there are a few moments in time where there seem to be gaps like in late june of 2011
 ```
 
 ```{r}
-
+ggplot(bikes_data, aes(x = as.factor(year), fill = as.factor(year), y = rides))+
+         geom_boxplot()+
+         geom_jitter()
 ```
 
 ```{r}
@@ -50,7 +61,15 @@ Starter Questions:
 3.  Are there more rides on weekdays or weekends? Make a plot and write what you see below
 
 ```{r}
+bikesWeek <- bikes_data |> 
+  select(rides, weekend) |> 
+  group_by(weekend) |> 
+  summarise(rides = sum(rides))
+  
 
+ggplot(bikesWeek, aes(x = weekend, y = rides)) + 
+  geom_col(fill = "aquamarine") + 
+  theme_bw()
 ```
 
 4.  **Does temperature feel effect ridership**?
@@ -65,6 +84,8 @@ ggplot(bikes_data, aes(x = temp_feel, y = rides)) +
   geom_point() +
   geom_smooth(method = "lm") +
   stat_cor()
+
+lm(data = bikes_data, rides~temp_actual)
   
 ```
 
@@ -80,7 +101,7 @@ Squaring it tells you something more concrete about the plot: R² ≈ 0.34
 
 p \< 2.2×10⁻¹⁶ — how confident you should be that this pattern is real, not a fluke of these particular 500 days
 
-- This tests rhe hypothesis that temperature and ridership have *no* linear relationship at all in the underlying population, and this pattern is just coincidental noise from sampling 500 particular days. The p-value says: **if that null hypothesis were actually true, seeing a correlation as strong as 0.58 in a sample this size would be astronomically unlikely**
+- This tests rhe hypothesis that temperature and ridership have *no* linear relationship at all in the underlying population, and this pattern is just coincidental noise from sampling 500 particular days. The p-value says: **if that null hypothesis were actually true, seeing a correlation as stro5ng as 0.58 in a sample this size would be astronomically unlikely**
 
 ```{r}
 lm(data = bikes_data, rides~temp_feel)
@@ -107,3 +128,34 @@ Repeat the all the steps to model the relationship between
 - rides and temp_actual
 
 - temp_feel and temp_actual
+
+```{r}
+ggplot(bikes_data, aes(x = humidity, y = rides)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  stat_cor()
+```
+
+```{r}
+ggplot(bikes_data, aes(x = windspeed, y = rides)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  stat_cor()
+```
+
+```{r}
+ggplot(bikes_data, aes(x = temp_actual, y = rides)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  stat_cor()
+```
+
+```{r}
+ggplot(bikes_data, aes(x = temp_actual, y = temp_feel)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  stat_cor()
+
+model1 <- lm(temp_actual ~ temp_feel, data = bikes_data)
+report(model1)
+```
