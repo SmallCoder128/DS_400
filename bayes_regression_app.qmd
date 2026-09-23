@@ -624,14 +624,12 @@ shinyApp(ui, server)
 ### Questions
 
 1.  According to the calculator the app is correct and the 95% confidence range falls between 22 and 178 rides .
-2.   Doubling the uncertainty (s1) concentrates the 200 prior plausible model lines in the center and flares the extremes.
+2.  Doubling the uncertainty (s1) concentrates the 200 prior plausible model lines in the center and flares the extremes.
 3.  The smaller sigma is the less certain the model seems to be or at the very least theres a lot more spread in the lines at lower sigma values.
 4.  The higher the sigma value is the less variance you get from the mean and since no variance would be 0 and the mean is the expected value 0 is the mode of the graph.
-5.  The closeness is a little surprising given n = 500 its not a super big sample so some variance between results is to be expected and only a \~0.1 shift on the posterior temp_feel is pretty close. My posterior values were -2203.73 and 82.25.
+5.  Even though the prior is pretty uncertain, the closeness is a little surprising given n = 500 its not a super big sample so some variance between results is to be expected and only a \~0.1 shift on the posterior temp_feel is pretty close. My posterior values were -2203.73 and 82.25.
 6.  P(beta1 \>0\| data) tells us what portion simulated lines were actually of any value and could explain what we see in the data and if a lot of them are below 0 then then the chance of these variables being related are low.
 7.  A Rhat of 1.5 would suggest that the MCMC lines conflict with each other often.
-8.  
-
-9\.
-
-10\.
+8.   Typical (mu) is estimated at 3967 riders in the 95% confidence interval of 3841 to 4098. For the posterior predictive interval the confidence interval is much wider being 95% confident that there will be between 1484 to 6437. The posterior predictive adds day to day variance into the mix which is what makes it wider whereas typical ridership of mu operates off of the average of just 75 degree days.
+9.  With a colder temprature such as 30 degrees the typical ridership sits at just about 0 but the variance of the day to day ridership causes the posterior predictive to dip well bellow 0 which doesn't really tell us anything because you cant have negative riders.
+10. The data alone pulls the posterior all the way down to the low end of the graph essentially saying that our guess was unrealistic given the data

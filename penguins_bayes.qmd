@@ -1,0 +1,40 @@
+---
+title: "Penguins_linear_reg"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(bayesrules)
+library(rstanarm)
+library(report)
+library(ggpubr)
+
+data <- bayesrules::penguins_bayes
+```
+
+## Histograms
+
+```{r}
+
+ggplot(data, aes(x = flipper_length_mm))+
+  geom_histogram(fill = "darkolivegreen", color = "black")+
+  theme_bw()
+
+```
+
+```{r}
+ggplot(data, aes(y = flipper_length_mm, x = bill_length_mm))+
+  geom_point(color = "darkolivegreen")+
+  geom_smooth(method = "lm")+ 
+  stat_cor()
+```
+
+```{r}
+m0 <- 200 
+s0 <- 10.2
+m1 <- 3.5
+s1 <- 1.02
+
+```
