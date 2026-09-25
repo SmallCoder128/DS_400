@@ -14,7 +14,7 @@ library(ggpubr)
 data <- bayesrules::penguins_bayes
 ```
 
-## Histograms
+## Histogram
 
 ```{r}
 
@@ -24,6 +24,8 @@ ggplot(data, aes(x = flipper_length_mm))+
 
 ```
 
+## Scatterplot
+
 ```{r}
 ggplot(data, aes(y = flipper_length_mm, x = bill_length_mm))+
   geom_point(color = "darkolivegreen")+
@@ -32,9 +34,47 @@ ggplot(data, aes(y = flipper_length_mm, x = bill_length_mm))+
 ```
 
 ```{r}
+library(ggExtra)
+
+sctr <- ggplot(data, aes(y = flipper_length_mm, x = bill_length_mm))+
+  geom_point(color = "darkolivegreen")+
+  geom_smooth(method = "lm")+ 
+  stat_cor()
+
+sctr_f <- ggMarginal(sctr, type= "density")
+
+print(sctr_f)
+```
+
+```{r}
 m0 <- 200 
 s0 <- 10.2
 m1 <- 3.5
 s1 <- 1.02
+l <- 0.08
 
+
+model <- stan_glm(
+  flipper_length_mm ~ bill_length_mm, data = data,
+  family = gaussian,
+  prior_intercept = normal(m0, s0),
+  prior = normal(m1, s1),
+  prior_aux = exponential(l),
+  chains = 4, iter = 2000, seed = 84735
+)
 ```
+
+```{r}
+posterior <- as.data.frame(model)
+beta0c_draws <- posterior$`(Intercept)` + posterior$bill_length
+```
+
+```{r}
+report::report(model)
+```
+
+## Areospace
+
+<https://data.nasa.gov/dataset/an-integrated-approach-to-battery-health-monitoring-using-bayesian-regression-classificati>
+
+<https://arc.aiaa.org/doi/abs/10.2514/1.A36088>
