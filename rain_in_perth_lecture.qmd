@@ -105,7 +105,7 @@ weather |>
 
 ### What does this model tell us and not tell us?
 
--  the model tells us that because of the abundance of no rain day data and lack of rainy day data it has difficulty predicting rainy days.
+- the model tells us that because of the abundance of no rain day data and lack of rainy day data it has difficulty predicting rainy days.
 
 ### Logistic Regression
 
