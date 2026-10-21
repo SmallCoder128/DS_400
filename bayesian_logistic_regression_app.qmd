@@ -1086,12 +1086,21 @@ shinyApp(ui, server)
 ### Question & Answers Here
 
 1.  a 0.8 / (1 - 0.8) is 4.0 so a rain probability of 80% means that rain is 4 times as likely as no rain
-2.   the odds are 0.250 and the log odds are -1.386 the log odds are negative because a log of less than one is negative
-3.   The log odds equal 0 at exactly 50% probability the odds are exactly 1 which means that there's an even relationship between rain and no rain. Rain is 1 times more likely than rain, an even split.
+
+2.  the odds are 0.250 and the log odds are -1.386 the log odds are negative because a log of less than one is negative
+
+3.  The log odds equal 0 at exactly 50% probability the odds are exactly 1 which means that there's an even relationship between rain and no rain. Rain is 1 times more likely than rain, an even split.
+
 4.  The log odds equal 2, the odds equal 7.389 and the probability equals 88.1%
+
 5.  the log odds change the same amount. the odds changes by the same multiplier at every humidity point but not the same amount.
+
 6.  best guess on an average day is a 20% chance of rain. if m0 changes to -0.5 the new chance becomes 38%
-7.   some of the s curve have a negative slope and the histogram becomes an even distribution rather than a normal one.
-8.  a
-9.  a
-10. a
+
+7.  some of the s curve have a negative slope and the histogram becomes an even distribution rather than a normal one.
+
+8.   The median for humidity9am log-odds scale was 0.0481. The median on the odds scale was 1.0493. So the precent increase in odds was 4.9 percent.
+
+9.  The intervals are pretty close to each other being only a hundredth off. The Bayesian credible interval says that there is an 80% probability that the humidity coefficient is between our two numbers whereas the The Frequentist confidence interval says that if we made a bunch of intervals 80% of those intervals would contain the correct coefficient.
+
+10. With a 99% humidity and a cutoff of 0.5 the model predicts rain tomorrow. This remains true with a 0.2 cutoff. A person who doesn't like getting wet would prefer a lower cutoff because the model will be more sensitive and correctly predict more rainy days. However they will have to be ok with the model being overall less accurate and carrying around an unnecessary umbrella.
