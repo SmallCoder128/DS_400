@@ -1093,7 +1093,7 @@ shinyApp(ui, server)
 
 4.  The log odds equal 2, the odds equal 7.389 and the probability equals 88.1%
 
-5.  the log odds change the same amount. the odds changes by the same multiplier at every humidity point but not the same amount.
+5.  the log odds change the same amount. the odds changes by the same multiplier at every humidity point but not the same amount. The probability changes by neither.
 
 6.  best guess on an average day is a 20% chance of rain. if m0 changes to -0.5 the new chance becomes 38%
 
