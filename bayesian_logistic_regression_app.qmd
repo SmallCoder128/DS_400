@@ -1099,7 +1099,7 @@ shinyApp(ui, server)
 
 7.  some of the s curve have a negative slope and the histogram becomes an even distribution rather than a normal one.
 
-8.   The median for humidity9am log-odds scale was 0.0481. The median on the odds scale was 1.0493. So the precent increase in odds was 4.9 percent.
+8.  The median for humidity9am log-odds scale was 0.0481. The median on the odds scale was 1.0493. So the precent increase in odds was 4.9 percent.
 
 9.  The intervals are pretty close to each other being only a hundredth off. The Bayesian credible interval says that there is an 80% probability that the humidity coefficient is between our two numbers whereas the The Frequentist confidence interval says that if we made a bunch of intervals 80% of those intervals would contain the correct coefficient.
 
