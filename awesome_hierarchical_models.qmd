@@ -17,6 +17,7 @@ library(ggpubr)
 library(rstanarm)
 library(broom.mixed)
 library(tidybayes)
+library(ggplot2)
 ```
 
 ### Data
@@ -34,43 +35,64 @@ We only have a few more chance to practice exploratory viz with `ggplot()` left 
 1.  What is the general distribution of run times
 
 ```{r}
-
+ggplot(running, aes(x=net)) + 
+  geom_density(color="blue")
 ```
 
 2.  What is the average run time by age
 
 ```{r}
-
+ggplot(running, aes(x = as.factor(age), y = net)) + 
+  geom_boxplot(fill = "steelblue", color= "black")+
+  theme_bw()
 ```
 
 3.  What is the distribution of run time by age
 
 ```{r}
-
+ggplot(running, aes(x = as.factor(age), y = net)) + 
+  geom_col(fill = "steelblue")
 ```
 
 4.  Did runner 27 get faster or slower with age?
 
 ```{r}
+runner27 <- running |> 
+  filter(runner == 27)
 
+ggplot(runner27, aes(x = as.factor(age), y = net)) + 
+  geom_col(fill = "steelblue", color= "black")
 ```
 
 5.  Has the average race time changed over the years
 
 ```{r}
+avgrun <- running |> 
+     group_by(year) |> 
+     summarise(avgyr = mean(net, na.rm = TRUE))
 
+ggplot(avgrun, aes(x= year, y=avgyr)) + 
+  geom_col(fill = "steelblue", color= "black")
 ```
 
 6.  What is the distribution of the difference between net and gun
 
 ```{r}
-
+running |> 
+  mutate(difference = gun - net) |> 
+  ggplot(aes(x = difference)) +
+  geom_histogram()
 ```
 
 7.  What is the distribution of run time by runner
 
 ```{r}
+avgrunner <- running |> 
+  group_by(runner) |> 
+  summarise(avgrun = mean(net, na.rm = TRUE))
 
+ggplot(avgrunner, aes(x=runner, y=avgrun)) + 
+  geom_col(fill = "steelblue", color= "black")
 ```
 
 ### Model Question
